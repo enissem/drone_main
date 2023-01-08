@@ -26,13 +26,13 @@ class VisualControl:
 
     @classmethod
     def run(cls, target_marker: MarkerStatus) -> type(RCStatus):
-        if target_marker.id == -1:  # When no markers are detected, smoothly stops the UAV
-            RCStatus.c = 0  # up_down_velocity
-            RCStatus.d = int(0.99 * RCStatus.d)  # yaw_velocity
-            RCStatus.a = int(0.99 * RCStatus.a)  # left_right_velocity
-            if 20 < cls.cmp <= 80:        # Waits for the UAV to pass the last Gate while decreasing its forward velocity
-                RCStatus.d = int(0.99 * RCStatus.d)  # yaw_velocity
-                RCStatus.a = int(0.99 * RCStatus.a)  # left_right_velocity
+        if target_marker.id == -1:  # quand plus de détection, on stoppe doucement le drone
+            RCStatus.c = 
+            RCStatus.d = int(0.99 * RCStatus.d)  
+            RCStatus.a = int(0.99 * RCStatus.a)  
+            if 20 < cls.cmp <= 80:        
+                RCStatus.d = int(0.99 * RCStatus.d)  # la vitesse de lacet diminue
+                RCStatus.a = int(0.99 * RCStatus.a)  # vitesse droite/gauche diminue
                 RCStatus.d = int(RCStatus.d + 15)
             elif 80 < cls.cmp < 250:
                 RCStatus.c = int(200 * RCStatus.c)
@@ -41,7 +41,7 @@ class VisualControl:
             elif 250 < cls.cmp < 500:
                 RCStatus.d = int(RCStatus.d + 15)
             if cls.cmp > 501:
-                RCStatus.b = int(0.99*RCStatus.b)   # for_back_velocity
+                RCStatus.b = int(0.99*RCStatus.b)   # on descend
             cls.cmp = cls.cmp + 1
             return RCStatus
         cls.cmp = 0
